@@ -118,7 +118,7 @@ echo "*    Installing Dependencies    *"
 echo "*                               *"
 echo "*********************************"
 echo -e "\n---- Install dependencies for Odoo install and management ----"
-sudo apt-get -y install wget subversion git bzr bzrtools python-pip gdebi-core unzip
+sudo apt-get -y install wget git python-pip gdebi-core unzip
 sudo apt-get -y install build-essential libldap2-dev libsasl2-dev libxml2-dev libxslt-dev libevent-dev libjpeg-dev libjpeg8-dev libtiff5-dev
 
 echo -e "\n---- Install build dependencies for Python 2.7.9 ----"
@@ -268,6 +268,9 @@ echo "*                               *"
 echo "*********************************"
 # This is for compatibility with Ubuntu 16.04. Will work on 14.04 and 15.04
 sudo -H pip install suds
+
+# Additional (kind of optional) dependencies
+sudo -H pip install GeoIP unicodecsv
 
 echo -e "\n--- Install Less CSS via nodejs and npm"
 curl -sL https://deb.nodesource.com/setup_0.12 | sudo -E bash -
