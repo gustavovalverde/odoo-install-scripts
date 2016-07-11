@@ -234,8 +234,6 @@ else
 fi
 if [  $HAVE_PROXY = "True" ]; then
     sudo su root -c "echo 'proxy_mode = 1' >> /etc/${OE_CONFIG}.conf"
-else
-    sudo su root -c "echo 'proxy_mode = 0' >> /etc/${OE_CONFIG}.conf"
 fi
 echo -e "* Change default xmlrpc port"
 sudo su root -c "echo 'xmlrpc_port = $OE_PORT' >> /etc/${OE_CONFIG}.conf"
