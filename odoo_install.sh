@@ -354,7 +354,7 @@ case "\${1}" in
 start)
 echo -n "Starting \${DESC}: "
 
-source $OE_HOME_EXT/$OE_VIRTENV/bin/activate
+. $OE_HOME_EXT/$OE_VIRTENV/bin/activate
 
 start-stop-daemon --start --quiet --pidfile \${PIDFILE} \
 --chuid \${USER} --background --make-pidfile \
