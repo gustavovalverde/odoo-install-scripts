@@ -59,10 +59,10 @@ sudo apt-get dist-upgrade -y
 #--------------------------------------------------
 # Fixed parameters for Odoo
 #--------------------------------------------------
-OE_USER="odoo"
+OE_USER="[odoo_admin_user]"
 OE_HOME="/$OE_USER"
 OE_HOME_EXT="/$OE_USER/${OE_USER}-server"
-OE_VIRTENV="venv"
+OE_VIRTENV="[virtualenv_name]"
 
 #Set it to true if you want to install it, false if you don't need it or have it already installed.
 INSTALL_WKHTMLTOPDF="True"
@@ -80,7 +80,7 @@ OE_VERSION="9.0"
 IS_ENTERPRISE="False"
 
 #set the superadmin password
-OE_SUPERADMIN="!terativ0##########"
+OE_SUPERADMIN="[@_v3ry_str0ng_p@ssw0rd!]"
 OE_CONFIG="${OE_USER}-server"
 
 ###  WKHTMLTOPDF download links
@@ -117,17 +117,22 @@ echo "*                               *"
 echo "*    Installing Dependencies    *"
 echo "*                               *"
 echo "*********************************"
-echo -e "\n---- Install tool packages ----"
+echo -e "\n---- Install dependencies for Odoo install and management ----"
 sudo apt-get -y install wget subversion git bzr bzrtools python-pip gdebi-core unzip
 sudo apt-get -y install python-dev build-essential libldap2-dev libsasl2-dev libxml2-dev libxslt-dev libevent-dev libjpeg-dev libjpeg8-dev libtiff5-dev
 
-echo -e "\n---- Install build dependencies for Python 2.7.9 build and install ----"
+echo -e "\n---- Install build dependencies for Python 2.7.9 ----"
 sudo apt-get -y install libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev
 
 echo -e "\n---- Install and Upgrade pip and virtualenv ----"
 sudo pip install --upgrade pip
 sudo pip install --upgrade virtualenv
 
+#--------------------------------------------------
+# Odoo uses Python 2.7.9, a best practice would
+# be to have a virtualenv with this version
+# where Odoo could run with its own dependencies
+#--------------------------------------------------
 echo -e "\n---- Build and install Python 2.7.9 ----"
 wget https://www.python.org/ftp/python/2.7.9/Python-2.7.9.tgz
 tar xfz Python-2.7.9.tgz
@@ -183,6 +188,10 @@ fi
 echo -e "\n---- Setting permissions on home folder ----"
 sudo chown -R $OE_USER:$OE_USER $OE_HOME/*
 
+#--------------------------------------------------
+# Virtualenv not working as expected
+# Do not use in a production environment
+#--------------------------------------------------
 echo "*********************************"
 echo "*                               *"
 echo "*     Creating VirtualEnv       *"
@@ -200,6 +209,9 @@ echo -e "\n---- Install Odoo python dependencies in requirements.txt ----"
 $OE_HOME_EXT/$OE_VIRTENV/bin/pip install -r $OE_HOME_EXT/requirements.txt
 sudo chown -R $OE_USER:$OE_USER $OE_HOME/*
 
+#--------------------------------------------------
+# Here starts the configuration of Odoo
+#--------------------------------------------------
 cd ~
 echo "*********************************"
 echo "*                               *"
@@ -247,15 +259,14 @@ sudo chmod 755 $OE_HOME_EXT/start.sh
 
 
 #--------------------------------------------------
-# Install Python Packages
+# Install additional Packages for Odoo
 #--------------------------------------------------
-
 echo "*********************************".
 echo "*                               *"
 echo "*    Install other packages     *"
 echo "*                               *"
 echo "*********************************"
-# This is for compatibility with Ubuntu 16.04. Will work on 14.04, 15.04 and 16.04
+# This is for compatibility with Ubuntu 16.04. Will work on 14.04 and 15.04
 sudo -H pip install suds
 
 echo -e "\n--- Install Less CSS via nodejs and npm"
