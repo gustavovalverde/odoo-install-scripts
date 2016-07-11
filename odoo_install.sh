@@ -208,6 +208,13 @@ activate () {
 
 echo -e "\n---- Install Odoo python dependencies in requirements.txt ----"
 $OE_HOME_EXT/$OE_VIRTENV/bin/pip install -r $OE_HOME_EXT/requirements.txt
+
+echo -e "\n---- Install additional python dependencies ----"
+# This is for compatibility with Ubuntu 16.04. Will work on 14.04 and 15.04
+$OE_HOME_EXT/$OE_VIRTENV/bin/pip install suds
+# Additional (kind of optional) dependencies
+$OE_HOME_EXT/$OE_VIRTENV/bin/pip install unicodecsv urllib3 GeoIP html5lib passlib
+
 sudo chown -R $OE_USER:$OE_USER $OE_HOME/*
 
 #--------------------------------------------------
@@ -261,17 +268,6 @@ sudo chmod 755 $OE_HOME_EXT/start.sh
 #--------------------------------------------------
 # Install additional Packages for Odoo
 #--------------------------------------------------
-echo "*********************************".
-echo "*                               *"
-echo "*    Install other packages     *"
-echo "*                               *"
-echo "*********************************"
-# This is for compatibility with Ubuntu 16.04. Will work on 14.04 and 15.04
-sudo -H pip install suds
-
-# Additional (kind of optional) dependencies
-sudo -H pip install GeoIP unicodecsv
-
 echo -e "\n--- Install Less CSS via nodejs and npm"
 curl -sL https://deb.nodesource.com/setup_0.12 | sudo -E bash -
 sudo apt-get -y install nodejs npm
