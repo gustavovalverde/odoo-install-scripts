@@ -275,6 +275,7 @@ sudo npm install -g npm
 sudo ln -s /usr/bin/nodejs /usr/bin/node
 sudo npm install -g less
 sudo npm install -g less-plugin-clean-css
+apt-get install node-less
 
 #--------------------------------------------------
 # Install Wkhtmltopdf if needed
