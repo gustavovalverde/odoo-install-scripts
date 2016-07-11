@@ -232,20 +232,21 @@ if [  $IS_ENTERPRISE = "True" ]; then
 else
     sudo su root -c "echo 'addons_path = $OE_HOME_EXT/addons,$OE_HOME/custom/addons' >> /etc/${OE_CONFIG}.conf"
 fi
-if [  $HAVE_PROXY = "True" ]; then
-    sudo su root -c "echo 'proxy_mode = 1' >> /etc/${OE_CONFIG}.conf"
-fi
+
 echo -e "* Change default xmlrpc port"
 sudo su root -c "echo 'xmlrpc_port = $OE_PORT' >> /etc/${OE_CONFIG}.conf"
 
-echo -e "* Rest of ${OE_CONFIG}.conf"
-cat <<EOF >> /etc/${OE_CONFIG}.conf
+if [  $HAVE_PROXY = "True" ]; then
+    sudo su root -c "echo 'proxy_mode = 1' >> /etc/${OE_CONFIG}.conf"
+    echo -e "* Rest of ${OE_CONFIG}.conf"
+    cat <<EOF >> /etc/${OE_CONFIG}.conf
 
-# Workers and timeouts
-workers = 4
-limit_time_real = 3600
-limit_time_cpu = 3600
+    # Workers and timeouts
+    workers = 4
+    limit_time_real = 3600
+    limit_time_cpu = 3600
 EOF
+fi
 
 #--------------------------------------------------
 # Startup File
