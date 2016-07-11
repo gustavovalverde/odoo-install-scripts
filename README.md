@@ -8,7 +8,7 @@ It also follows the approach recommended in Odoo's documentation (https://www.od
 <h3>Installation procedure</h3>
 1. Download the script:
 ```
-sudo wget https://raw.githubusercontent.com/gustavovalverde/install-scripts/ubuntu/odoo_install.sh
+sudo wget https://raw.githubusercontent.com/gustavovalverde/odoo-install-scripts/master/odoo_install.sh
 ```
 2. Make the script executable:
 ```
