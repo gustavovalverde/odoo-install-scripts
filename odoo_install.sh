@@ -59,10 +59,10 @@ sudo apt-get dist-upgrade -y
 #--------------------------------------------------
 # Fixed parameters for Odoo
 #--------------------------------------------------
-OE_USER="[odoo_admin_user]"
+OE_USER="odoo"
 OE_HOME="/$OE_USER"
 OE_HOME_EXT="/$OE_USER/${OE_USER}-server"
-OE_VIRTENV="[virtualenv_name]"
+OE_VIRTENV="venv"
 
 #Set it to true if you want to install it, false if you don't need it or have it already installed.
 INSTALL_WKHTMLTOPDF="True"
@@ -80,7 +80,7 @@ OE_VERSION="9.0"
 IS_ENTERPRISE="False"
 
 #set the superadmin password
-OE_SUPERADMIN="[@_v3ry_str0ng_p@ssw0rd!]"
+OE_SUPERADMIN="admin"
 OE_CONFIG="${OE_USER}-server"
 
 ###  WKHTMLTOPDF download links
