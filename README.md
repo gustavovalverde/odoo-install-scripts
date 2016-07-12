@@ -20,7 +20,7 @@ wget https://raw.githubusercontent.com/gustavovalverde/odoo-install-scripts/mast
   OE_SUPERADMIN="admin"
 ```
 
-2. Modify this variables based on your needs:
+3. Modify this variables based on your needs:
 ```bash
   INSTALL_WKHTMLTOPDF="True"
   HAVE_PROXY="False" 
@@ -29,12 +29,12 @@ wget https://raw.githubusercontent.com/gustavovalverde/odoo-install-scripts/mast
   IS_ENTERPRISE="False"
 ```
 
-3. Make the script executable:
+4. Make the script executable:
 ```bash
 chmod +x odoo_install.sh
 ```
 
-4. Execute the script:
+5. Execute the script:
 ```bash
 . odoo_install.sh
 ```
