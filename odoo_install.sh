@@ -119,7 +119,7 @@ echo "*                               *"
 echo "*********************************"
 echo -e "\n---- Install dependencies for Odoo install and management ----"
 sudo apt-get -y install wget git python-pip gdebi-core unzip
-sudo apt-get -y install build-essential libldap2-dev libsasl2-dev libxml2-dev libxslt-dev libevent-dev libjpeg-dev libjpeg8-dev libtiff5-dev
+sudo apt-get -y install build-essential libldap2-dev libsasl2-dev libxml2-dev libxslt-dev libevent-dev libjpeg-dev libjpeg8-dev libtiff5-dev libgeoip-dev
 
 echo -e "\n---- Install build dependencies for Python 2.7.9 ----"
 sudo apt-get -y install libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev zlib1g-dev
