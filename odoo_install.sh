@@ -118,8 +118,8 @@ echo "*    Installing Dependencies    *"
 echo "*                               *"
 echo "*********************************"
 echo -e "\n---- Install dependencies for Odoo install and management ----"
-sudo apt-get -y install wget git python-pip gdebi-core unzip
-sudo apt-get -y install build-essential libldap2-dev libsasl2-dev libxml2-dev libxslt-dev libevent-dev libjpeg-dev libjpeg8-dev libtiff5-dev libgeoip-dev
+sudo apt-get -y install wget curl git python-pip gdebi-core unzip
+sudo apt-get -y install build-essential libldap2-dev libsasl2-dev libxml2-dev libxslt-dev libevent-dev libjpeg-dev libjpeg8-dev libtiff5-dev
 
 echo -e "\n---- Install build dependencies for Python 2.7.9 ----"
 sudo apt-get -y install libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev zlib1g-dev
@@ -202,9 +202,6 @@ echo -e "\n---- Configuring virtualenv for Odoo ----"
 cd $OE_HOME_EXT
 sudo virtualenv --python=/usr/local/lib/python2.7.9/bin/python $OE_VIRTENV
 source $OE_HOME_EXT/$OE_VIRTENV/bin/activate
-activate () {
-  . $OE_HOME_EXT/$OE_VIRTENV/bin/activate
-}
 
 echo -e "\n---- Install Odoo python dependencies in requirements.txt ----"
 $OE_HOME_EXT/$OE_VIRTENV/bin/pip install -r $OE_HOME_EXT/requirements.txt
@@ -212,8 +209,20 @@ $OE_HOME_EXT/$OE_VIRTENV/bin/pip install -r $OE_HOME_EXT/requirements.txt
 echo -e "\n---- Install additional python dependencies ----"
 # This is for compatibility with Ubuntu 16.04. Will work on 14.04 and 15.04
 $OE_HOME_EXT/$OE_VIRTENV/bin/pip install suds
+
+sudo chown -R $OE_USER:$OE_USER $OE_HOME/*
+
+#--------------------------------------------------
+# Optional dependencies for common modules
+#--------------------------------------------------
+echo "*********************************"
+echo "*                               *"
+echo "*     Installing Optionals      *"
+echo "*                               *"
+echo "*********************************"
+sudo apt-get -y install libgeoip-dev libffi-dev libssl-dev geoip-database-contrib
 # Additional (kind of optional) dependencies
-$OE_HOME_EXT/$OE_VIRTENV/bin/pip install unicodecsv urllib3 GeoIP html5lib passlib
+$OE_HOME_EXT/$OE_VIRTENV/bin/pip install unicodecsv urllib3 GeoIP html5lib passlib pysftp
 
 sudo chown -R $OE_USER:$OE_USER $OE_HOME/*
 
@@ -270,7 +279,7 @@ sudo chmod 755 $OE_HOME_EXT/start.sh
 #--------------------------------------------------
 echo -e "\n--- Install Less CSS via nodejs and npm"
 curl -sL https://deb.nodesource.com/setup_0.12 | sudo -E bash -
-sudo apt-get -y install nodejs npm
+sudo apt-get -y install npm nodejs
 sudo npm install -g npm
 sudo ln -s /usr/bin/nodejs /usr/bin/node
 sudo npm install -g less
