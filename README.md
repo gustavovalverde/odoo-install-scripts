@@ -1,5 +1,5 @@
 # odoo-install-scripts
-Automated install scripts for Odoo v8 or v9 (Community or Enterprise editions). This scripts just needs to be preconfigured before being launched, no interaction needed. 
+Automated install scripts for Odoo v8 or v9 (Community editions). This scripts just needs to be preconfigured before being launched, no interaction needed. 
 
 The script is based on the install script from André Schenkels (https://github.com/aschenkels-ictstudio/openerp-install-scripts) and having some additions from the one of Yenthe (https://github.com/Yenthe666/InstallScript) but with a lot of additions as virtualenv and considerations for proxied installs, Nginx, and extra tools. 
 
