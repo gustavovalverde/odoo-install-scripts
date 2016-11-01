@@ -44,6 +44,30 @@ PSQL_VERSION="9.6"
 #Change server directory and configuration name
 OE_CONFIG="${OE_USER}-server"
 
+#--------------------------------------------------
+# Fixed parameters for NGINX
+#--------------------------------------------------
+#General Domain and Server
+DOMAIN_NAME="EXAMPLE.COM" #change with your domain
+SRVR_IP=$(dig +short myip.opendns.com @resolver1.opendns.com)
+
+#Odoo Web Gui configuration for Nginx
+ODOO_SRVC="odoo"
+ODOO_IP="127.0.0.1" #$SRVR_IP, Loopback or your private odoo server IP
+ODOO_PORT="8069"
+HTTP_PORT="80" #HTTP External Port
+HTTPS_PORT="443" #HTTPS External Port
+
+#Change to your company details
+country="DO"
+state="Santo_Domingo"
+locality="DN"
+organization="iterativo.do"
+organizationalunit="IT"
+email="help@iterativo.do"
+commonname=$DOMAIN_NAME
+
+
 ###  WKHTMLTOPDF download links
 ## === Ubuntu Trusty x64 & x32 === (for other distributions please replace these two links,
 ## in order to have correct version of wkhtmltox installed, for a danger note refer to
@@ -310,42 +334,6 @@ EOF
 
 echo -e "* Register the service"
 systemctl enable odoo.service
-
-
-#!/bin/bash
-#--------------------------------------------------
-# Fixed parameters for NGINX
-#--------------------------------------------------
-#General Domain and Server
-DOMAIN_NAME="EXAMPLE.COM" #change with your domain
-SRVR_IP=$(dig +short myip.opendns.com @resolver1.opendns.com)
-
-#Odoo Web Gui configuration for Nginx
-ODOO_SRVC="odoo"
-ODOO_IP="127.0.0.1" #$SRVR_IP, Loopback or your private odoo server IP
-ODOO_PORT="8069"
-HTTP_PORT="80" #HTTP External Port
-HTTPS_PORT="443" #HTTPS External Port
-
-#Change to your company details
-country="DO"
-state="Santo_Domingo"
-locality="DN"
-organization="iterativo.do"
-organizationalunit="IT"
-email="help@iterativo.do"
-commonname=$DOMAIN_NAME
-
-#--------------------------------------------------
-# Update Server
-#--------------------------------------------------
-echo "*********************************"
-echo "*                               *"
-echo "*     Updating and upgrading    *"
-echo "*                               *"
-echo "*********************************"
-sudo apt-get update
-sudo apt-get dist-upgrade -y
 
 #--------------------------------------------------
 # Nginx Install
